@@ -32,10 +32,57 @@ Normalizing the data
 Splitting the data into test and train
 
 ## PROGRAM:
-/Write your code here/
+ import pandas as pd
+ import io
+ from sklearn.preprocessing import StandardScaler
+ from sklearn.preprocessing import MinMaxScaler
+ from sklearn.model_selection import train_test_split
+ #read the dataset
+ df=pd.read_csv('Churn_Modelling data.csv')
+ df
+ #drop unwanted columns
+ df.drop('RowNumber',axis=1,inplace=True)
+ df.drop('CustomerId',axis=1,inplace=True)
+ df.drop('Surname',axis=1,inplace=True)
+ df.drop('Geography',axis=1,inplace=True)
+ df.drop('Age',axis=1,inplace=True)
+ df.drop('Gender',axis=1,inplace=True)
+ df
+#checking for null, duplicates, outliers in lasrt column
+df.isnull().sum()
+
+df.duplicated()
+
+df['Exited'].describe()
+#normalising data to normal distribution
+sc=MinMaxScaler()
+df2=pd.DataFrame(sc.fit_transform(df),columns=['CreditScore','Tenure','Balance',
+'NumOfProducts','HasCrCard','IsActiveMember','EstimatedSalary','Exited'])
+ df2
+ #split dataset
+ x=df2.iloc[:,:-1].values #all rows from all except last column
+ x
+ y=df2.iloc[:,-1].values #all rows from only last column
+ y
+ ##creating training and test data
+ X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
+ print(X_train)
+ print("Size of X_train: ",len(X_train))
+ print(X_test)
+ print("Size of X_test: ",len(X_test))
 
 ## OUTPUT:
-/ Show the result/
+![image](https://github.com/DEEPAK22003907/Ex.No.1---Data-Preprocessing/assets/119404520/8c755d89-a806-4471-aa6d-2b9c0486f4ac)
+![image](https://github.com/DEEPAK22003907/Ex.No.1---Data-Preprocessing/assets/119404520/a827be7f-b336-42f8-9d77-fcc83f3a78a9)
+![image](https://github.com/DEEPAK22003907/Ex.No.1---Data-Preprocessing/assets/119404520/abf916df-7a0a-4f51-8669-0c5bb16c3ba5)
+![image](https://github.com/DEEPAK22003907/Ex.No.1---Data-Preprocessing/assets/119404520/21fc4229-b256-44c3-9f07-1ee8787750d9)
+![image](https://github.com/DEEPAK22003907/Ex.No.1---Data-Preprocessing/assets/119404520/89cdd1b1-74ff-4315-b964-145394edc673)
+![image](https://github.com/DEEPAK22003907/Ex.No.1---Data-Preprocessing/assets/119404520/86e8702a-13bd-4f51-b77d-6cd2a463745c)
+![image](https://github.com/DEEPAK22003907/Ex.No.1---Data-Preprocessing/assets/119404520/2e429950-4009-4219-9696-58feb03f28f5)
+![image](https://github.com/DEEPAK22003907/Ex.No.1---Data-Preprocessing/assets/119404520/672caf94-4ccd-4bbb-b904-1c392e1d048c)
+![image](https://github.com/DEEPAK22003907/Ex.No.1---Data-Preprocessing/assets/119404520/72e6ffec-c899-4172-baf9-d4380fbd3796)
+![image](https://github.com/DEEPAK22003907/Ex.No.1---Data-Preprocessing/assets/119404520/01122b67-2b07-4424-aa84-ae0c5d8f0064)
+
 
 ## RESULT
-/Type your result here/
+Thus, the Data preprocessing is performed over a data set successfully.
